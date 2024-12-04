@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Swagger configuration
+
 const swaggerOptions = {
   swaggerDefinition: {
     openapi: '3.0.0',
@@ -32,7 +32,7 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-// Multer setup
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads');
@@ -44,7 +44,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Database configuration
+
 const dbConfig = {
   user: 'postgres',
   host: 'localhost',
@@ -55,7 +55,7 @@ const dbConfig = {
 
 const pool = new Pool(dbConfig);
 
-// JWT Authentication middleware
+
 const authenticateJWT = (req, res, next) => {
   const token = req.header('Authorization')?.split(' ')[1];
 
@@ -204,7 +204,7 @@ app.get('/api/features', authenticateJWT, async (req, res) => {
   }
 });
 
-// Admin functionality for managing companies
+
 /**
  * @swagger
  * /api/admin/register:
